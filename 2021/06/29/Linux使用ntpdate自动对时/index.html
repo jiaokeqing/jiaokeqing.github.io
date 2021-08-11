@@ -272,7 +272,34 @@
 </div>
 <div class="article-content">
     <div id="article" class="content">
-        
+        <h2 id="NTP服务概述"><a href="#NTP服务概述" class="headerlink" title="NTP服务概述"></a>NTP服务概述</h2><ul>
+<li><p>###原理<br>NTP（Network TimeProtocol，网络时间协议）是用来使计算机时间同步的一种协议。它可以使计算机对其服务器或时钟源做同步化，它可以提供高精准度的时间校正（LAN上与标准间差小于1毫秒，WAN上几十毫秒），切可介由加密确认的方式来防止恶意的协议攻击。<br>模式： C/S模式</p>
+</li>
+<li><h3 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h3><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">[root@test_S ~]# vim /etc/services <br>nntp            119/tcp         readnews untp   # USENET News Transfer Protocol<br>nntp            119/udp         readnews untp   # USENET News Transfer Protocol<br>ntp             123/tcp<br>ntp             123/udp                         # Network Time Protocol<br></code></pre></td></tr></table></figure></li>
+<li><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ul>
+<li>服务端安装   </li>
+</ul>
+<p>  服务端需要将NTP和ntpdate都安装上   </p>
+  <figure class="highlight stylus"><table><tr><td class="code"><pre><code class="hljs stylus"><span class="hljs-selector-attr">[root@test_S ~]</span> yum -y install ntp         #NTP两个软件包都会安装上<br> Installed:<br> ntp<span class="hljs-selector-class">.x86_64</span> <span class="hljs-number">0</span>:<span class="hljs-number">4.2</span>.<span class="hljs-number">6</span>p5-<span class="hljs-number">1</span><span class="hljs-selector-class">.el6</span>                                      <br> Dependency Installed:ntpdate<span class="hljs-selector-class">.x86_64</span> <span class="hljs-number">0</span>:<span class="hljs-number">4.2</span>.<span class="hljs-number">6</span>p5-<span class="hljs-number">1</span><span class="hljs-selector-class">.el6</span>                                  <br> Complete!   <br></code></pre></td></tr></table></figure>
+<ul>
+<li>客户端安装<br>客户端只需要装ntpdate</li>
+</ul>
+  <figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">[root@test_C ~]# rpm -ivh /mnt/Packages/ntpdate-4.2.6p5-1.el6.x86_64.rpm     #只安装ntpdate安装包<br>warning: /mnt/Packages/ntpdate-4.2.6p5-1.el6.x86_64.rpm: Header V3 RSA/SHA256 Signature, key ID fd431d51: NOKEY<br>Preparing...                ########################################### [100%]<br>package ntpdate-4.2.6p5-1.el6.x86_64 is already installed<br></code></pre></td></tr></table></figure>
+<ul>
+<li>查看配置文件位置</li>
+</ul>
+  <figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">[root@linl_S ~]# ls /etc/ntp.conf <br>/etc/ntp.conf<br></code></pre></td></tr></table></figure></li>
+<li><h3 id="启动NTP服务"><a href="#启动NTP服务" class="headerlink" title="启动NTP服务"></a>启动NTP服务</h3></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell"> [root@test_S ~]# service ntpd start          #启动ntp服务<br> Starting ntpd:                                             [  OK  ]<br> [root@test_S ~]# netstat -anptu |grep 123    #查看端口123是否开放<br> udp        0      0 10.0.0.15:123               0.0.0.0:*                               5846/ntpd           <br> udp        0      0 127.0.0.1:123               0.0.0.0:*                               5846/ntpd           <br> udp        0      0 0.0.0.0:123                 0.0.0.0:*                               5846/ntpd           <br> udp        0      0 fe80::20c:29ff:fea9:c1ae:123 :::*                                    5846/ntpd           <br> udp        0      0 ::1:123                     :::*                                    5846/ntpd           <br> udp        0      0 :::123                      :::*                                    5846/ntpd           <br>[root@test_S ~]# chkconfig ntpd on           #开机自启动<br></code></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="客户端与NTP服务端对时"><a href="#客户端与NTP服务端对时" class="headerlink" title="客户端与NTP服务端对时"></a>客户端与NTP服务端对时</h3><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">[root@test_C ~]# ntpdate test_S_ip<br>22 May 22:06:17 ntpdate[2464]: the NTP socket is in use, exiting<br></code></pre></td></tr></table></figure></li>
+<li><h3 id="配置开机自动对时"><a href="#配置开机自动对时" class="headerlink" title="配置开机自动对时"></a>配置开机自动对时</h3><ul>
+<li>在/etc/cron.hourly/ntplog建立文件夹（mkdir /etc/cron.hourly/ntplog），使用crontab -e 编辑加入以下命令   </li>
+</ul>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">每小时0分执行对时脚本，输出错误日志到指定目录</span><br>0 * * * * /usr/sbin/ntpdate test_S_IP 2&gt; /etc/cron.hourly/ntplog/ntp.log &amp;<br></code></pre></td></tr></table></figure>
     </div>
 </div>
 <style>
