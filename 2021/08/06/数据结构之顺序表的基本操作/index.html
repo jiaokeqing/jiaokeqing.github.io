@@ -3,14 +3,14 @@
 
 	<head>
 		
-<title>MySQL双主热备-JIAOKEQING</title>
+<title>数据结构之顺序表的基本操作-JIAOKEQING</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="shortcut icon" type="image/x-icon" href="/image/favicon.ico">
 
 
-<meta name="keywords" content="MySQL,">
+<meta name="keywords" content="数据结构,线性表,顺序表,">
 <meta name="description" content="">
 
 
@@ -245,11 +245,15 @@
         <ul class="tag">
             
             
-            <li><a href="/tags/MySQL">MySQL</a></li>
+            <li><a href="/tags/数据结构">数据结构</a></li>
+            
+            <li><a href="/tags/线性表">线性表</a></li>
+            
+            <li><a href="/tags/顺序表">顺序表</a></li>
             
             
         </ul>
-        <h1>MySQL双主热备</h1>
+        <h1>数据结构之顺序表的基本操作</h1>
         <div class="article-info">
             <div class="article-author">
                 
@@ -261,14 +265,37 @@
                 </svg>
                 
                 <span> <a href="">JIAOKEQING</a></span>
-                <p>2021-07-21 18:33:36</p>
+                <p>2021-08-06 09:03:18</p>
             </div>
         </div>
     </div>
 </div>
 <div class="article-content">
     <div id="article" class="content">
-        
+        <h2 id="顺序表"><a href="#顺序表" class="headerlink" title="顺序表"></a>顺序表</h2><ul>
+<li><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3>线性表的顺序表示是指用<strong>一组地址连续</strong>的存储单元<strong>依次存储</strong>线性表的数据元素，这种表示也称作线性表的<strong>顺序存储结构</strong>或<strong>顺序映像</strong>。通常称这种存储结构为<strong>顺序表</strong>。<br>其特点是，<strong>逻辑上相邻的数据元素，其在物理次序上也是相邻的</strong>。   </li>
+</ul>
+<p>假设线性表每个元素需要l个存储单元，并以所占的第一个单元的存储地址作为数据元素的存储起始位置。则线性表中第i+1个数据元素的存储位置LOC(ai+1)和第i个数据元素的存储位置LOC(ai)满足LOC(ai+1)=LOC(ai)+l。<br>一般来说，线性表的第i个数据元素ai的存储位置为：LOC(ai)=LOC(a1)+(i-1)*l</p>
+<ul>
+<li><h3 id="顺序表的存储结构"><a href="#顺序表的存储结构" class="headerlink" title="顺序表的存储结构"></a>顺序表的存储结构</h3></li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MAXSIZE 100;</span><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span>&#123;</span><br>    ElemType *elem;<br>    <span class="hljs-keyword">int</span> length;<br>&#125;SqList;<br></code></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="顺序表的初始化"><a href="#顺序表的初始化" class="headerlink" title="顺序表的初始化"></a>顺序表的初始化</h3><figure class="highlight reasonml"><table><tr><td class="code"><pre><code class="hljs reasonml">void <span class="hljs-constructor">InitList(SqlList &amp;L)</span>&#123;<br>    <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">L</span>.</span></span>elem=<span class="hljs-keyword">new</span> ElemType<span class="hljs-literal">[MAXSIZE]</span>;<br>    #内存分配失败<br>    <span class="hljs-keyword">if</span>(!<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">L</span>.</span></span>elem)<br>        return ERROR;<br>    <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">L</span>.</span></span>length=<span class="hljs-number">0</span>;<br>    return OK;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li><h3 id="顺序表的取值"><a href="#顺序表的取值" class="headerlink" title="顺序表的取值"></a>顺序表的取值</h3><figure class="highlight csharp"><table><tr><td class="code"><pre><code class="hljs csharp"><span class="hljs-function">status <span class="hljs-title">GetElem</span>(<span class="hljs-params">SqList L,<span class="hljs-built_in">int</span> i,ElemType &amp;e</span>)</span>&#123;<br>    <span class="hljs-meta">#取值超出顺序表的范围</span><br>    <span class="hljs-keyword">if</span>(i&lt;<span class="hljs-number">1</span>||i&gt;L.length)<br>        <span class="hljs-keyword">return</span> ERROR;<br>    e=L.elem[i];<br>    <span class="hljs-keyword">return</span> OK;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>时间复杂度:O(1)</p>
+</li>
+<li><h3 id="顺序表的查找"><a href="#顺序表的查找" class="headerlink" title="顺序表的查找"></a>顺序表的查找</h3><figure class="highlight reasonml"><table><tr><td class="code"><pre><code class="hljs reasonml"><span class="hljs-built_in">int</span> <span class="hljs-constructor">LocationElem(SqlList L,ElemType <span class="hljs-params">e</span>)</span>&#123;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-built_in">int</span> j=<span class="hljs-number">0</span>;j&lt;<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">L</span>.</span></span>length;j++)&#123;<br>        <span class="hljs-keyword">if</span>(<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">L</span>.</span></span>elem<span class="hljs-literal">[<span class="hljs-identifier">j</span>]</span>==e)<br>            return j+<span class="hljs-number">1</span>;<br>    &#125;<br>    return <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>通过计算期望来获得平均查找长度ASL=P1C1+P2C2+…+PnCn=1/n(1+2+3+…+n)=(n+1)/2<br>所以平均时间复杂度为O(n)</p>
+</li>
+<li><h3 id="顺序表的插入"><a href="#顺序表的插入" class="headerlink" title="顺序表的插入"></a>顺序表的插入</h3><figure class="highlight glsl"><table><tr><td class="code"><pre><code class="hljs glsl">status ListInsert(SqList &amp;L,<span class="hljs-type">int</span> i,ElemType e)&#123;<br>    <span class="hljs-meta">#判断插入位置是否超出顺序表范围</span><br>    <span class="hljs-keyword">if</span>(i&lt;<span class="hljs-number">1</span>||i&gt;L.<span class="hljs-built_in">length</span>+<span class="hljs-number">1</span>)<br>        <span class="hljs-keyword">return</span> ERROR;<br>    <span class="hljs-meta">#判断存储空间是否已满</span><br>    <span class="hljs-keyword">if</span>(L.<span class="hljs-built_in">length</span>==MAXSIZE)<br>        <span class="hljs-keyword">return</span> ERROR;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=L.<span class="hljs-built_in">length</span>;j&gt;i;j--)&#123;<br>        L.elem[j]=L.elem[j<span class="hljs-number">-1</span>];<br>    &#125;<br>    L.elem[i<span class="hljs-number">-1</span>]=e;<br>    L.<span class="hljs-built_in">length</span>++;<br>    <span class="hljs-keyword">return</span> OK;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>通过计算期望来获得平均查找长度ASL=(n+1)/2<br>所以平均时间复杂度为O(n)</p>
+</li>
+<li><h3 id="顺序表的删除"><a href="#顺序表的删除" class="headerlink" title="顺序表的删除"></a>顺序表的删除</h3><figure class="highlight glsl"><table><tr><td class="code"><pre><code class="hljs glsl">status ListDelete(SqList &amp;L,<span class="hljs-type">int</span> i)&#123;<br>    <span class="hljs-meta">#判读位置是否在顺序表范围内</span><br>    <span class="hljs-keyword">if</span>(i&lt;<span class="hljs-number">1</span>||i&gt;L.<span class="hljs-built_in">length</span>)<br>        <span class="hljs-keyword">return</span> ERROR;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=i;j&lt;=L.<span class="hljs-built_in">length</span>;j++)&#123;<br>        L.elem[j<span class="hljs-number">-1</span>]=L.elem[j]<br>    &#125;<br>    --L.<span class="hljs-built_in">length</span>;<br>    <span class="hljs-keyword">return</span> OK;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>平均时间复杂度为O(n)</p>
+</li>
+</ul>
+
     </div>
 </div>
 <style>
@@ -297,19 +324,12 @@
 </script>
 <div class="Last-Next">
     
-    <a href="/2021/07/24/%E6%8B%92%E7%BB%9Dkill-9%EF%BC%8C%E4%BC%98%E9%9B%85%E5%81%9C%E6%AD%A2SpringCloud%E6%9C%8D%E5%8A%A1/">
-        <div class="last">
-            <span>上一篇</span>
-            <p>拒绝kill -9，优雅停止SpringCloud服务</p>
-        </div>
-    </a>
-    
 
     
-    <a href="/2021/06/29/Linux%E4%BD%BF%E7%94%A8ntpdate%E8%87%AA%E5%8A%A8%E5%AF%B9%E6%97%B6/">
+    <a href="/2021/07/24/%E6%8B%92%E7%BB%9Dkill-9%EF%BC%8C%E4%BC%98%E9%9B%85%E5%81%9C%E6%AD%A2SpringCloud%E6%9C%8D%E5%8A%A1/">
         <div class="next">
             <span>下一篇</span>
-            <p>Linux使用ntpdate自动对时</p>
+            <p>拒绝kill -9，优雅停止SpringCloud服务</p>
         </div>
     </a>
     
