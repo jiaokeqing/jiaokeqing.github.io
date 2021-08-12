@@ -301,16 +301,12 @@
 <p>后插法</p>
 <figure class="highlight gradle"><table><tr><td class="code"><pre><code class="hljs gradle"><span class="hljs-keyword">void</span> CreateList_R(LinkedList &amp;L,<span class="hljs-keyword">int</span> n)&#123;<br>    <span class="hljs-comment">//创建一个头结点</span><br>    L=<span class="hljs-keyword">new</span> LNode;<br>    L.<span class="hljs-keyword">next</span>=<span class="hljs-keyword">NULL</span>;<br>    q=L;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;<br>        p=<span class="hljs-keyword">new</span> LNode;<br>        p.<span class="hljs-keyword">next</span>=<span class="hljs-keyword">NULL</span>;<br>        cin&gt;&gt;p.data;<br>        q.<span class="hljs-keyword">next</span>=p;<br>        q=p;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>时间复杂度：O(n)</p>
-<ul>
-<li><h3 id="循环链表"><a href="#循环链表" class="headerlink" title="循环链表"></a>循环链表</h3>循环链表是另一种存储结构，其特点是表中<strong>最后一个结点的指针指向头结点</strong>，形成一个环。   </li>
-</ul>
+<h2 id="循环链表"><a href="#循环链表" class="headerlink" title="循环链表"></a>循环链表</h2><p>循环链表是另一种存储结构，其特点是表中<strong>最后一个结点的指针指向头结点</strong>，形成一个环。   </p>
 <p>循环单链表的操作和单链表基本一致，差别仅在于：当链表遍历时，判别当前指针p是否指向表尾结点的中止条件不同。在单链表中判别条件为<code>p!=NULL</code>或<code>p.next!=NULL</code>,而在循环单链表中判别条件为<code>p!=L</code>或<code>p.next!=L</code>   </p>
 <p>在某些情况下，若在循环链表中设立尾指针而不设立头指针，可使一些操作简化。例如，将两个线性表合并成一个表时，仅需将第一个表的尾指针指向第二个表的第一个节点，第二个表的尾指针指向第一个表的头结点，然后释放第二个表的头结点。</p>
 <figure class="highlight ini"><table><tr><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">p</span>=B.next.next<span class="hljs-comment">;</span><br><span class="hljs-attr">A.next</span>=p<span class="hljs-comment">;</span><br><span class="hljs-attr">B.next</span>=A.next<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
 <p>时间复杂度:O(1)</p>
-<ul>
-<li><h3 id="双向链表"><a href="#双向链表" class="headerlink" title="双向链表"></a>双向链表</h3>在双向链表中有两个指针域，一个指向直接前驱，一个指向直接后继。</li>
-</ul>
+<h2 id="双向链表"><a href="#双向链表" class="headerlink" title="双向链表"></a>双向链表</h2><p>在双向链表中有两个指针域，一个指向直接前驱，一个指向直接后继。</p>
 <p>双向链表存储结构</p>
 <figure class="highlight gauss"><table><tr><td class="code"><pre><code class="hljs gauss">typedef <span class="hljs-keyword">struct</span> <span class="hljs-type">DuLNode</span>&#123;<br>    <span class="hljs-keyword">struct</span> <span class="hljs-type">DuLNode</span> *next;<br>    <span class="hljs-keyword">struct</span> <span class="hljs-type">DuLNode</span> *prior;<br>    ElemType data;<br>&#125;DuLNode,DuLinkedList;<br></code></pre></td></tr></table></figure>
 <p>在双向链表中插入操作需要修改4个指针，删除操作需要修改2个指针。</p>
