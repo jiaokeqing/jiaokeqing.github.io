@@ -10,7 +10,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="/image/favicon.ico">
 
 
-<meta name="keywords" content="数据结构,栈,线性表,">
+<meta name="keywords" content="数据结构,线性表,栈,">
 <meta name="description" content="">
 
 
@@ -247,9 +247,9 @@
             
             <li><a href="/tags/数据结构">数据结构</a></li>
             
-            <li><a href="/tags/栈">栈</a></li>
-            
             <li><a href="/tags/线性表">线性表</a></li>
+            
+            <li><a href="/tags/栈">栈</a></li>
             
             
         </ul>
@@ -293,6 +293,43 @@
 <li><h3 id="链栈的出栈"><a href="#链栈的出栈" class="headerlink" title="链栈的出栈"></a>链栈的出栈</h3><figure class="highlight gauss"><table><tr><td class="code"><pre><code class="hljs gauss">Stutus <span class="hljs-keyword">Pop</span>(LinkedStack &amp;s,SElemType e)&#123;<br>    <span class="hljs-comment">//空栈</span><br>    <span class="hljs-keyword">if</span>(s==<span class="hljs-built_in">NULL</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">ERROR</span>;<br>    e=s.data;<br>    p=s<br>    s=p.next;<br>    <span class="hljs-keyword">delete</span> p;<br>    <span class="hljs-keyword">return</span> OK;<br>&#125;<br></code></pre></td></tr></table></figure></li>
 <li><h3 id="链栈的取栈顶元素"><a href="#链栈的取栈顶元素" class="headerlink" title="链栈的取栈顶元素"></a>链栈的取栈顶元素</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">SElemType <span class="hljs-title">GetTop</span><span class="hljs-params">(LinkedStack s)</span></span>&#123;<br>    <span class="hljs-keyword">if</span>(s==<span class="hljs-literal">NULL</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>    <span class="hljs-keyword">return</span> s.data;    <br>&#125;<br></code></pre></td></tr></table></figure></li>
 </ul>
+<h2 id="栈与递归"><a href="#栈与递归" class="headerlink" title="栈与递归"></a>栈与递归</h2><p>所谓递归是指，若一个函数、过程或者数据结构定义的内部又直接（或间接）出现定义本身的应用，则称它是递归的，或者是递归定义的。<br>以下三种情况下，常常使用递归的方法。</p>
+<ul>
+<li><h3 id="定义是递归的"><a href="#定义是递归的" class="headerlink" title="定义是递归的"></a>定义是递归的</h3>有很多数学函数是递归定义的，如阶乘函数、二阶Fibonacci数列。对于这种函数可以使用递归来求解。<br>阶乘函数递归求解<figure class="highlight excel"><table><tr><td class="code"><pre><code class="hljs excel">long <span class="hljs-built_in">fact</span>(<span class="hljs-built_in">int</span> <span class="hljs-built_in">n</span>)&#123;<br>    <span class="hljs-built_in">if</span>(<span class="hljs-built_in">n</span>==<span class="hljs-number">0</span>) <br>        return <span class="hljs-number">1</span>;<br>    return <span class="hljs-built_in">n</span>*<span class="hljs-built_in">fact</span>(<span class="hljs-built_in">n</span>-<span class="hljs-number">1</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+对于类似这种的复杂问题，若能够分解成几个<strong>相对简单</strong>且<strong>解法相同或类似</strong>的子问题求解，便称作<strong>递归求解</strong>。例如在计算4！时先计算3！，然后再进一步分解进行求解，这种分解-求解的策略叫做“<strong>分治法</strong>”。</li>
+</ul>
+<p>采取“分治法”进行递归求解的问题需要满足三个条件。   </p>
+<ol>
+<li>能将一个问题转变成一个新问题，而新问题与原问题的解法相同或类同，不同的仅是处理的对象，并且这些处理对象更小且变化有规律。</li>
+<li>可以通过上述转化使问题简化。</li>
+<li><strong>必须有一个明确的递归出口，或称递归的边界</strong>。   </li>
+</ol>
+<p>“分治法”求解递归问题算法的一般形式为：</p>
+<figure class="highlight less"><table><tr><td class="code"><pre><code class="hljs less"><span class="hljs-selector-tag">void</span> <span class="hljs-selector-tag">p</span>(参数表)&#123;<br>    <span class="hljs-selector-tag">if</span>(递归结束条件成立)可直接求解；  <span class="hljs-comment">//递归终止的条件</span><br>    <span class="hljs-selector-tag">else</span> <span class="hljs-selector-tag">p</span>(较小的参数)；           <span class="hljs-comment">//递归步骤</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="数据结构是递归的"><a href="#数据结构是递归的" class="headerlink" title="数据结构是递归的"></a>数据结构是递归的</h3>某些数据结构本身具有递归的特性，则它们的操作可递归的描述。<br>例如，对于链表，其结点LNode的定义是由数据源data和指针域next组成，而指针域next是一种指向LNode类型的指针，即LNode的定义中又用到了其自身，所以链表是一种递归的数据结构。   </li>
+</ul>
+<p>对于递归的数据结构，相应算法采用递归的方法来实现特别方便。链表的创建和链表结点的遍历输出都可以采用递归方式。   </p>
+<p>遍历输出链表中各结点的递归算法</p>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><code class="hljs reasonml">void <span class="hljs-constructor">TraverseList(LinkedList <span class="hljs-params">l</span>)</span>&#123;<br>    <span class="hljs-keyword">if</span>(l==null)&#123;<br>        return ;<br>    &#125;<span class="hljs-keyword">else</span>&#123;<br>        cout&lt;&lt;l.data&lt;&lt;<span class="hljs-keyword">end</span>;<br>        <span class="hljs-constructor">TraverseList(<span class="hljs-params">l</span>.<span class="hljs-params">next</span>)</span>;<br>    &#125;    <br>&#125;<br></code></pre></td></tr></table></figure>
+<p>在递归算法中，如果当递归结束条件成立，只执行return操作时，“分治法”求解递归问题算法的一般形式可以简化为：</p>
+<figure class="highlight isbl"><table><tr><td class="code"><pre><code class="hljs isbl"><span class="hljs-variable">void</span> <span class="hljs-function"><span class="hljs-title">p</span>(参数表)&#123;</span><br><span class="hljs-function">    <span class="hljs-title">if</span>(递归结束条件不成立)</span><br>        <span class="hljs-function"><span class="hljs-title">p</span>(较小的参数)</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>因此遍历输出链表中各结点的递归算法可以简化为：</p>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><code class="hljs reasonml">void <span class="hljs-constructor">TraverseList(LinkedList <span class="hljs-params">l</span>)</span>&#123;<br>    <span class="hljs-keyword">if</span>(l!=null)&#123;<br>        cout&lt;&lt;l.data&lt;&lt;<span class="hljs-keyword">end</span>;<br>        <span class="hljs-constructor">TraverseList(<span class="hljs-params">l</span>.<span class="hljs-params">next</span>)</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>相应的，广义表、二叉树也是典型的具有递归特性的数据结构，其相应的算法也可以采用递归的形式实现。</p>
+<ul>
+<li><h3 id="问题的解法是递归的"><a href="#问题的解法是递归的" class="headerlink" title="问题的解法是递归的"></a>问题的解法是递归的</h3>还有一类问题，虽然问题本身并没有明显的递归结构，但用递归求解比用迭代求解更简单，如Hanoi塔问题、八皇后问题、迷宫问题等。</li>
+</ul>
+<p>【问题描述】<br>假设有3个分别命名为 A、 B 和 C 的塔座，在 塔座 A 上插有n个直径大小各不相同，依小到大编 号为1, 2, … , n 的圆盘。现要求将塔座 A 上的n个圆盘移至塔座 C 上，并仍按同样 顺序叠排，圆盘移动时必须遵循下列规则：<br>(1)每次只能移动一个圆盘；<br>(2) 圆盘可以插在 A、 B 和 C 中的任一塔座上；<br>(3) 任何时刻都不能将一个较大的圆盘压在较小的圆盘之上。</p>
+<p>【问题分析】<br>如何实现移动圆盘的操作呢？可以用分治求解的递归方法来解决这个问题。设A柱上最初的盘子总数为n, 则当n =1时，只要将编号为1的圆盘从塔座A直接移至塔座C上即可；否则，执行以下三步：<br>(1) 用 C 柱做过渡，将 A 柱上的(n-l)个盘子移到 B 柱上；<br>(2) 将 A 柱上最后一个盘子直接移到 C 柱上；<br>(3) 用 A 柱做过渡，将 B 柱上的(n-l)个盘子移到C柱上。   </p>
+<p>为了便于描述算法，将搬动操作定义为 move(A,n,C), 是指将编号为 n 的圆盘从 A 移到C,<br>同时设一个初值为0的全局变量 m, 对搬动进行计数：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> m=O; <br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">move</span><span class="hljs-params">(<span class="hljs-keyword">char</span> A,<span class="hljs-keyword">int</span> n,<span class="hljs-keyword">char</span> C)</span> </span>&#123; <br>    cout&lt;&lt;++m&lt;&lt;<span class="hljs-string">&quot;, &quot;</span>&lt;&lt;n&lt;&lt;<span class="hljs-string">&quot;, &quot;</span>&lt;&lt;A&lt;&lt;<span class="hljs-string">&quot;, &quot;</span>&lt;&lt;C&lt;&lt;endl;<br>&#125;    <br></code></pre></td></tr></table></figure>
+<p>【算法步骤】<br>1.如果n=l, 则直接将编号为l的圆盘从A移到C, 递归结束。<br>2.否则：<br>• 递归， 将A上编号为1至n-l的圆盘移到B, C做辅助塔；<br>• 直接将编号为n的圆盘从A移到C;<br>• 递归， 将B上编号为1至n-1的圆盘移到C, A做辅助塔。  </p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><code class="hljs scss">void Hanoi(int n,char A,char B,char C)&#123;<br>    <span class="hljs-comment">//将塔座A上的n个圆盘按规则搬到C上，B做辅助塔</span><br>    <br>    <span class="hljs-comment">//将编号为1的圆盘从A移到C</span><br>    if(n==<span class="hljs-number">1</span>)&#123;<br>        move(A,<span class="hljs-number">1</span>,C);<br>    &#125;else&#123;<br>        <span class="hljs-comment">//将A上编号为1至n-1的圆盘移到B，C做辅助塔</span><br>        Hanoi(n-<span class="hljs-number">1</span>,A,B,C);<br>        <span class="hljs-comment">//将编号为n的圆盘从A移到C</span><br>        move(A,n,C);<br>        <span class="hljs-comment">//将B上编号为1至n-1的圆盘移到C，A做辅助塔</span><br>        Hanoi(n-<span class="hljs-number">1</span>,B,A,C);<br>    &#125;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="递归过程"><a href="#递归过程" class="headerlink" title="递归过程"></a>递归过程</h3>通常，当在一个函数的运行期间，调用另一个函数时，在运行被调用函数之前，系统需先完成3件事：   </li>
+</ul>
+<p>1.将所有的实参、返回地址等信息传递给被调用函数保存。<br>2.为被调用函数的局部变量分配存储区。<br>3.将控制转移到被调函数的入口。<br>而从被调用函数返回调用函数之前，系统也应完成3件工作：<br>1.保存被调函数的计算结果<br>2.释放被调函数的数据区<br>3.依照被调函数保存的返回地址将控制转移到调用函数</p>
 
     </div>
 </div>
