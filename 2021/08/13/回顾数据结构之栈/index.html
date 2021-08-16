@@ -3,14 +3,14 @@
 
 	<head>
 		
-<title>回顾数据结构之线性表的应用-JIAOKEQING</title>
+<title>回顾数据结构之栈-JIAOKEQING</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="shortcut icon" type="image/x-icon" href="/image/favicon.ico">
 
 
-<meta name="keywords" content="数据结构,线性表,有序表,">
+<meta name="keywords" content="数据结构,栈,线性表,">
 <meta name="description" content="">
 
 
@@ -247,13 +247,13 @@
             
             <li><a href="/tags/数据结构">数据结构</a></li>
             
-            <li><a href="/tags/线性表">线性表</a></li>
+            <li><a href="/tags/栈">栈</a></li>
             
-            <li><a href="/tags/有序表">有序表</a></li>
+            <li><a href="/tags/线性表">线性表</a></li>
             
             
         </ul>
-        <h1>回顾数据结构之线性表的应用</h1>
+        <h1>回顾数据结构之栈</h1>
         <div class="article-info">
             <div class="article-author">
                 
@@ -265,23 +265,34 @@
                 </svg>
                 
                 <span> <a href="">JIAOKEQING</a></span>
-                <p>2021-08-11 09:43:18</p>
+                <p>2021-08-13 09:56:18</p>
             </div>
         </div>
     </div>
 </div>
 <div class="article-content">
     <div id="article" class="content">
-        <h2 id="线性表的合并"><a href="#线性表的合并" class="headerlink" title="线性表的合并"></a>线性表的合并</h2><figure class="highlight reasonml"><table><tr><td class="code"><pre><code class="hljs reasonml">void <span class="hljs-constructor">MergeList(List &amp;LA,List LB)</span>&#123;<br>    m=<span class="hljs-constructor">ListLength(LA)</span>;<br>    n=<span class="hljs-constructor">ListLength(LB)</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-built_in">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)&#123;<br>        <span class="hljs-comment">//取出LB中第i个位置的数据元素复制给e</span><br>        <span class="hljs-constructor">GetElem(LB,<span class="hljs-params">i</span>,<span class="hljs-params">e</span>)</span>;<br>        <span class="hljs-comment">//如果LA中没有相同的数据元素</span><br>        <span class="hljs-keyword">if</span>(!<span class="hljs-constructor">LocationElem(LA,<span class="hljs-params">e</span>)</span>)<br>          <span class="hljs-constructor">InsertList(LA,<span class="hljs-operator">++</span><span class="hljs-params">m</span>,<span class="hljs-params">e</span>)</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>时间复杂度：O(mxn)</p>
-<h2 id="有序表的合并"><a href="#有序表的合并" class="headerlink" title="有序表的合并"></a>有序表的合并</h2><p>若线性表中的数据相互可以比较，并且数据元素在表中依<strong>非递增</strong>或<strong>非递减</strong>方式排列，则称该线性表为<strong>有序表</strong>。   </p>
-<ul>
-<li><h3 id="顺序有序表的合并"><a href="#顺序有序表的合并" class="headerlink" title="顺序有序表的合并"></a>顺序有序表的合并</h3><figure class="highlight routeros"><table><tr><td class="code"><pre><code class="hljs routeros">void MergeList_sq(SqList LA,SqList LB,SqList &amp;LC)&#123;<br>    LC.<span class="hljs-attribute">length</span>=LA.length+LB.length;<br>    LC.<span class="hljs-attribute">elem</span>=new ElemType[LC.length];<br>    <span class="hljs-attribute">pa</span>=LA.elem;<br>    <span class="hljs-attribute">pb</span>=LB.elem;<br>    <span class="hljs-attribute">pc</span>=LC.elem;<br>    <span class="hljs-attribute">pa_last</span>=pa+PA.length-1;<br>    <span class="hljs-attribute">pb_last</span>=pb+PB.length-1;<br>    <span class="hljs-keyword">while</span>(pa&lt;=pa_last&amp;&amp;pb&lt;pb_last)&#123;<br>        <span class="hljs-keyword">if</span>(*pa&lt;*pb)&#123;<br>            *pc++=*pa++;<br>        &#125;<span class="hljs-keyword">else</span>&#123;<br>            *pc++=*pb++<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">while</span>(pa&lt;=pa_last)<br>        *pc++=*pa++;<br>    <span class="hljs-keyword">while</span>(pb&lt;=pb_last)<br>        *pc++=*pb++;<br>&#125;<br></code></pre></td></tr></table></figure>
-时间复杂度O(m+n)</li>
-<li><h3 id="链式有序表的合并"><a href="#链式有序表的合并" class="headerlink" title="链式有序表的合并"></a>链式有序表的合并</h3></li>
+        <h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><ul>
+<li><h3 id="定义和特点"><a href="#定义和特点" class="headerlink" title="定义和特点"></a>定义和特点</h3><p>栈是限定仅在<strong>表尾</strong>进行插入或删除操作的线性表。因此，对栈来说，表尾端有其特殊含义，称为<strong>栈顶</strong>，相应的，表头端称为<strong>栈底</strong>。不含元素的空表称为空栈。</p>
+</li>
+<li><h3 id="顺序栈的表示和实现"><a href="#顺序栈的表示和实现" class="headerlink" title="顺序栈的表示和实现"></a>顺序栈的表示和实现</h3><p>顺序栈的存储结构</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MAXSIZE 100;</span><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span>&#123;</span><br>    <span class="hljs-comment">//栈底指针</span><br>    SElemType *base;<br>    <span class="hljs-comment">//栈顶指针</span><br>    SElemType *top;<br>    <span class="hljs-comment">//栈可用的最大容量</span><br>    <span class="hljs-keyword">int</span> stacksize;<br>&#125;SqStack;<br></code></pre></td></tr></table></figure>
+<p>base为<strong>栈底指针</strong>，初始化完成后，栈底指针base<strong>始终指向栈底的位置</strong>，若base的值为NULL，则表明栈结构不存在。top为<strong>栈顶指针</strong>，其<strong>初值指向栈底</strong>。每当插入新的元素时，栈顶指针增加1；删除元素时。栈顶指针减少1。<br>因此，栈空时，<strong>栈底指针等于栈顶指针</strong>，都指向栈底。当栈非空时，栈顶指针始终指向<strong>栈顶元素的上一个位置</strong>。</p>
+</li>
+<li><h3 id="顺序栈的初始化"><a href="#顺序栈的初始化" class="headerlink" title="顺序栈的初始化"></a>顺序栈的初始化</h3><p>顺序栈的初始化就是为顺序栈动态分配一个预定大小的数组空间。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><code class="hljs csharp"><span class="hljs-function">status <span class="hljs-title">InitStack</span>(<span class="hljs-params">SqStack &amp;s</span>)</span>&#123;<br>    s.<span class="hljs-keyword">base</span>=<span class="hljs-keyword">new</span> SElemType[MAXSIZE];<br>    <span class="hljs-comment">//空间分配失败</span><br>    <span class="hljs-keyword">if</span>(!s.<span class="hljs-keyword">base</span>)<br>        <span class="hljs-keyword">return</span> ERROR;<br>    <span class="hljs-comment">//初始化为base，空栈</span><br>    s.top=s.<span class="hljs-keyword">base</span>;<br>    s.stacksize=MAXSIZE;<br>    <span class="hljs-keyword">return</span> OK;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li><h3 id="顺序栈的入栈"><a href="#顺序栈的入栈" class="headerlink" title="顺序栈的入栈"></a>顺序栈的入栈</h3><figure class="highlight csharp"><table><tr><td class="code"><pre><code class="hljs csharp"><span class="hljs-function">status <span class="hljs-title">push</span>(<span class="hljs-params">SqStack &amp;s, SElemType e</span>)</span>&#123;<br>    <span class="hljs-comment">//栈满</span><br>    <span class="hljs-keyword">if</span>(s.top-s.<span class="hljs-keyword">base</span>=s.stacksize)<br>        <span class="hljs-keyword">return</span> ERROR;<br>    *s.top++=e;<br>    <span class="hljs-keyword">return</span> OK;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li><h3 id="顺序表的出栈"><a href="#顺序表的出栈" class="headerlink" title="顺序表的出栈"></a>顺序表的出栈</h3><figure class="highlight sas"><table><tr><td class="code"><pre><code class="hljs sas">status pop(SqStack <span class="hljs-variable">&amp;e</span>,SElemType <span class="hljs-variable">&amp;e</span>)&#123;<br>    //空栈<br>    <span class="hljs-meta">if</span>(s.top==s.base)<br>        <span class="hljs-meta">return</span> <span class="hljs-meta">ERROR</span>;<br>    e=<span class="hljs-comment">*--s.top;</span><br>    <span class="hljs-meta">return</span> OK;    <br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li><h3 id="取顺序栈栈顶元素"><a href="#取顺序栈栈顶元素" class="headerlink" title="取顺序栈栈顶元素"></a>取顺序栈栈顶元素</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">SElemType <span class="hljs-title">GetTop</span><span class="hljs-params">(SqStack s)</span></span>&#123;<br>    <span class="hljs-comment">//空栈</span><br>    <span class="hljs-keyword">if</span>(s.top!=s.base)<br>        <span class="hljs-keyword">return</span> * (--s.top);    <br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li><h3 id="链栈的表示和实现"><a href="#链栈的表示和实现" class="headerlink" title="链栈的表示和实现"></a>链栈的表示和实现</h3><p>链栈是指采用<strong>链式存储结构</strong>实现的栈。通常链栈用<strong>单链表</strong>来表示。<br>链栈的结构</p>
+<figure class="highlight elm"><table><tr><td class="code"><pre><code class="hljs elm">typedef struct <span class="hljs-type">StackNode</span>&#123;<br>    <span class="hljs-type">SElemType</span> data;<br>    struct <span class="hljs-type">StackNode</span> *next;<br>&#125;<span class="hljs-type">StackNode</span>,<span class="hljs-type">LinkedStack</span>;<br></code></pre></td></tr></table></figure></li>
+<li><h3 id="链栈的初始化"><a href="#链栈的初始化" class="headerlink" title="链栈的初始化"></a>链栈的初始化</h3><p>链栈的初始化就是构造一个空栈，因为没必要设立头结点，所以直接将栈顶指针置空即可。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">Status <span class="hljs-title">InitStack</span><span class="hljs-params">(LinedStack &amp;s)</span></span>&#123;<br>    S=<span class="hljs-literal">NULL</span>;<br>    <span class="hljs-keyword">return</span> OK;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li><h3 id="链栈的入栈"><a href="#链栈的入栈" class="headerlink" title="链栈的入栈"></a>链栈的入栈</h3><p>使用<strong>头插法</strong>进行插入，首项数据就是栈顶数据。</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><code class="hljs routeros">Status push(LinedStack &amp;s,SElemType e)&#123;<br>  <span class="hljs-attribute">p</span>=new LinkedNode;<br>  p.<span class="hljs-attribute">data</span>=e;<br>  p.<span class="hljs-attribute">next</span>=s;<br>  <span class="hljs-attribute">s</span>=p;<br>  return OK;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li><h3 id="链栈的出栈"><a href="#链栈的出栈" class="headerlink" title="链栈的出栈"></a>链栈的出栈</h3><figure class="highlight gauss"><table><tr><td class="code"><pre><code class="hljs gauss">Stutus <span class="hljs-keyword">Pop</span>(LinkedStack &amp;s,SElemType e)&#123;<br>    <span class="hljs-comment">//空栈</span><br>    <span class="hljs-keyword">if</span>(s==<span class="hljs-built_in">NULL</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">ERROR</span>;<br>    e=s.data;<br>    p=s<br>    s=p.next;<br>    <span class="hljs-keyword">delete</span> p;<br>    <span class="hljs-keyword">return</span> OK;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li><h3 id="链栈的取栈顶元素"><a href="#链栈的取栈顶元素" class="headerlink" title="链栈的取栈顶元素"></a>链栈的取栈顶元素</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">SElemType <span class="hljs-title">GetTop</span><span class="hljs-params">(LinkedStack s)</span></span>&#123;<br>    <span class="hljs-keyword">if</span>(s==<span class="hljs-literal">NULL</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>    <span class="hljs-keyword">return</span> s.data;    <br>&#125;<br></code></pre></td></tr></table></figure></li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><code class="hljs routeros">void MergeList_L(LinkedList &amp;LA,LinkedList &amp;LB,LinkedList &amp;LC)&#123;<br>    <span class="hljs-attribute">pa</span>=LA.next;<br>    <span class="hljs-attribute">pb</span>=LB.next;<br>    <span class="hljs-attribute">LC</span>=LA;<br>    <span class="hljs-attribute">pc</span>=LC;<br>    <span class="hljs-keyword">while</span>(pa&amp;&amp;pb)&#123;<br>        <span class="hljs-keyword">if</span>(pa.data&lt;pb.data)&#123;<br>            pc.<span class="hljs-attribute">next</span>=pa;<br>            <span class="hljs-attribute">pa</span>=pa.next;<br>            <span class="hljs-attribute">pc</span>=pc.next;<br>        &#125;<span class="hljs-keyword">else</span>&#123;<br>            pc.<span class="hljs-attribute">next</span>=pb;<br>            <span class="hljs-attribute">pb</span>=pb.next;<br>            <span class="hljs-attribute">pc</span>=pc.next;<br>        &#125;<br>    &#125;<br>    pc.<span class="hljs-attribute">next</span>=pa?pa:pb;<br>    delete LB;<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>时间复杂度O(m+n)<br>空间复杂度O(1)</p>
 
     </div>
 </div>
@@ -311,19 +322,12 @@
 </script>
 <div class="Last-Next">
     
-    <a href="/2021/08/13/%E5%9B%9E%E9%A1%BE%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E6%A0%88/">
-        <div class="last">
-            <span>上一篇</span>
-            <p>回顾数据结构之栈</p>
-        </div>
-    </a>
-    
 
     
-    <a href="/2021/08/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E9%93%BE%E8%A1%A8/">
+    <a href="/2021/08/11/%E5%9B%9E%E9%A1%BE%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E5%BA%94%E7%94%A8/">
         <div class="next">
             <span>下一篇</span>
-            <p>回顾数据结构之链表</p>
+            <p>回顾数据结构之线性表的应用</p>
         </div>
     </a>
     
